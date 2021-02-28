@@ -67,4 +67,8 @@ public final class BetterSleepManager {
             }
         }.runTaskTimer(BetterSleepMain.main, 5, 5);
     }
+
+    public static int getSleepingNeeded(World world) {
+        return (int) (world.getPlayerCount() * PERCENTAGE);
+    }
 }
