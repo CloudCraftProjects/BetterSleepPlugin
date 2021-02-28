@@ -44,7 +44,7 @@ public final class BetterSleepManager {
         return (double) world.getPlayerCount() / getSleeping(world.getUID()).size() >= PERCENTAGE;
     }
 
-    public static BukkitTask skipNight(World world, Consumer<Boolean> consumer) {
+    public static BukkitTask skipNight(World world, Consumer<Void> consumer) {
         if (world.isDayTime()) throw new AlreadyDayException(world);
         if (skippingWorlds.contains(world.getUID())) throw new AlreadySkippingException(world);
 
@@ -53,7 +53,7 @@ public final class BetterSleepManager {
             @Override
             public void run() {
                 if (world.isDayTime() || !canSkip(world)) {
-                    consumer.accept(world.isDayTime());
+                    if (world.isDayTime()) consumer.accept(null);
                     cancel();
                 } else {
                     world.setTime(world.getTime() + 100);
