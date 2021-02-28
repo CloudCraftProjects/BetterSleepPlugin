@@ -23,13 +23,13 @@ public final class BetterSleepManager {
         return sleeping.containsKey(uuid);
     }
 
-    public static List<UUID> getSleeping(World world) {
-        return sleeping.entrySet().stream().filter(entry -> world.getUID().equals(entry.getValue())).map(Map.Entry::getKey).collect(Collectors.toList());
+    public static List<UUID> getSleeping(UUID world) {
+        return sleeping.entrySet().stream().filter(entry -> world.equals(entry.getValue())).map(Map.Entry::getKey).collect(Collectors.toList());
     }
 
-    public static boolean addSleeping(World world, UUID uuid) {
+    public static boolean addSleeping(UUID world, UUID uuid) {
         if (!isSleeping(uuid)) {
-            sleeping.put(uuid, world.getUID());
+            sleeping.put(uuid, world);
             return true;
         } else {
             return false;
