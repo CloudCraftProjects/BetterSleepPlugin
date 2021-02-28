@@ -1,0 +1,7 @@
+name: BetterSleepPlugin
+version: @version@
+main: tk.booky.bettersleepplugin.BetterSleepMain
+api-version: 1.13
+prefix: BSP
+authors: [ booky10 ]
+website: https://booky.tk/
