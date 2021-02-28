@@ -22,8 +22,8 @@ public class BedEnterListener implements Listener {
             MessageManager.broadcastWorld(world, MessageManager.SLEEPING_NEEDED, BetterSleepManager.getSleeping(world.getUID()).size(), BetterSleepManager.getSleepingNeeded(world), String.format(MessageManager.SLEEPING_NEEDED_JOIN, player.getName()));
 
             if (BetterSleepManager.canSkip(world) && !BetterSleepManager.isAlreadySkipping(world.getUID())) {
-                MessageManager.broadcastWorld(world, MessageManager.SLEEPING_START);
-                BetterSleepManager.skipNight(world, (none) -> MessageManager.broadcastWorld(world, MessageManager.NIGHT_OVER));
+                MessageManager.broadcastWorld(world, false, MessageManager.SLEEPING_START);
+                BetterSleepManager.skipNight(world, (none) -> MessageManager.broadcastWorld(world, false, MessageManager.NIGHT_OVER));
             }
         }
     }
