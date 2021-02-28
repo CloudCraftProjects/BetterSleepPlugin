@@ -5,6 +5,7 @@ import org.bukkit.World;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import tk.booky.bettersleepplugin.BetterSleepMain;
+import tk.booky.bettersleepplugin.exceptions.AlreadyDayException;
 import tk.booky.bettersleepplugin.exceptions.AlreadySkippingException;
 
 import java.util.ArrayList;
@@ -42,6 +43,7 @@ public final class BetterSleepManager {
     }
 
     public static BukkitTask skipNight(World world, Consumer<Boolean> consumer) {
+        if (world.isDayTime()) throw new AlreadyDayException(world);
         if (skipping.contains(world.getUID())) throw new AlreadySkippingException(world);
 
         skipping.add(world.getUID());
