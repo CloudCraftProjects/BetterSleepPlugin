@@ -5,7 +5,7 @@ import org.bukkit.World;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import tk.booky.bettersleepplugin.BetterSleepMain;
-import tk.booky.bettersleepplugin.utils.AlreadyDayException;
+import tk.booky.bettersleepplugin.exceptions.AlreadySkippingException;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,6 +16,8 @@ import java.util.function.Consumer;
 public final class BetterSleepManager {
 
     private static final List<UUID> sleeping = new ArrayList<>();
+    private static final List<UUID> skipping = new ArrayList<>();
+
     public static final double PERCENTAGE = 0.3;
 
     public static boolean isSleeping(UUID uuid) {
@@ -40,6 +42,9 @@ public final class BetterSleepManager {
     }
 
     public static BukkitTask skipNight(World world, Consumer<Boolean> consumer) {
+        if (skipping.contains(world.getUID())) throw new AlreadySkippingException(world);
+
+        skipping.add(world.getUID());
         return new BukkitRunnable() {
             @Override
             public void run() {
@@ -49,6 +54,12 @@ public final class BetterSleepManager {
                 } else {
                     world.setTime(world.getTime() + 100);
                 }
+            }
+
+            @Override
+            public synchronized void cancel() throws IllegalStateException {
+                skipping.remove(world.getUID());
+                super.cancel();
             }
         }.runTaskTimer(BetterSleepMain.main, 5, 5);
     }
