@@ -6,14 +6,19 @@ import org.bukkit.World;
 public final class MessageManager {
 
     public static final String PREFIX = "§7[§bSleeping§7]§c ";
-    public static final String NIGHT_OVER = PREFIX + "§aDie Nacht ist vorbei und es ist nun Tag!";
-    public static final String SLEEPING_NEEDED = PREFIX + "§cEs sind jetzt %s/%s Spieler im Bett! (%s)";
-    public static final String SLEEPING_NEEDED_JOIN = "%s ist hinzugekommen.";
-    public static final String SLEEPING_NEEDED_LEAVE = "%s ist rausgegangen.";
+    public static final String NIGHT_OVER = PREFIX + "§aDie Nacht ist vorbei!";
+    public static final String SLEEPING_NEEDED = "§7%s/%s Spieler im Bett! %s";
+    public static final String SLEEPING_NEEDED_JOIN = "§a+%s";
+    public static final String SLEEPING_NEEDED_LEAVE = "§c-%s";
     public static final String SLEEPING_START = PREFIX + "§aDie Nacht wird übersprungen...";
-    public static final String SLEEPING_CANCEL = PREFIX + "§cDas Überspringen der Nacht wurde abgebrochen, da %s aus dem Bett gegangen ist!";
+    public static final String SLEEPING_CANCEL = "§cAbbruch! §c-%s";
 
     public static void broadcastWorld(World world, String message, Object... args) {
-        world.getPlayers().forEach(player -> player.sendActionBar(String.format(message, args)));
+        broadcastWorld(world, true, message, args);
+    }
+
+    public static void broadcastWorld(World world, boolean actionBar, String message, Object... args) {
+        if (actionBar) world.getPlayers().forEach(player -> player.sendActionBar(String.format(message, args)));
+        else world.getPlayers().forEach(player -> player.sendMessage(String.format(message, args)));
     }
 }
