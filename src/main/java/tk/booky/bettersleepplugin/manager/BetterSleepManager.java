@@ -19,25 +19,25 @@ public final class BetterSleepManager {
 
     public static final double PERCENTAGE = 0.3;
 
-    public static boolean isSleeping(UUID uuid) {
-        return sleeping.containsKey(uuid);
+    public static boolean isSleeping(UUID player) {
+        return sleeping.containsKey(player);
     }
 
     public static List<UUID> getSleeping(UUID world) {
         return sleeping.entrySet().stream().filter(entry -> world.equals(entry.getValue())).map(Map.Entry::getKey).collect(Collectors.toList());
     }
 
-    public static boolean addSleeping(UUID world, UUID uuid) {
-        if (!isSleeping(uuid)) {
-            sleeping.put(uuid, world);
+    public static boolean addSleeping(UUID world, UUID player) {
+        if (!isSleeping(player)) {
+            sleeping.put(player, world);
             return true;
         } else {
             return false;
         }
     }
 
-    public static void removeSleeping(UUID uuid) {
-        sleeping.remove(uuid);
+    public static void removeSleeping(UUID player) {
+        sleeping.remove(player);
     }
 
     public static boolean canSkip(World world) {
@@ -50,6 +50,7 @@ public final class BetterSleepManager {
 
         skippingWorlds.add(world.getUID());
         return new BukkitRunnable() {
+
             @Override
             public void run() {
                 if (world.isDayTime() || !canSkip(world)) {
