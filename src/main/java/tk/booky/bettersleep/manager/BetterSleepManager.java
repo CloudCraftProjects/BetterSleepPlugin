@@ -41,7 +41,7 @@ public final class BetterSleepManager {
     }
 
     public static boolean canSkip(World world) {
-        return (double) world.getPlayerCount() / getSleeping(world.getUID()).size() >= PERCENTAGE;
+        return getSleeping(world.getUID()).size() >= getSleepingNeeded(world);
     }
 
     public static BukkitTask skipNight(World world, Consumer<Void> consumer) {
