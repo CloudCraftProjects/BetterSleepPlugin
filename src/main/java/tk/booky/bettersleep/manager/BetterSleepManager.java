@@ -17,7 +17,7 @@ public final class BetterSleepManager {
     private static final HashMap<UUID, UUID> sleeping = new HashMap<>();
     private static final List<UUID> skippingWorlds = new ArrayList<>();
 
-    public static final double PERCENTAGE = 0.3;
+    public static final double PERCENTAGE = 0.1;
 
     public static boolean isSleeping(UUID player) {
         return sleeping.containsKey(player);
