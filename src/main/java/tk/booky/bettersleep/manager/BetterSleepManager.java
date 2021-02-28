@@ -1,7 +1,9 @@
 package tk.booky.bettersleep.manager;
 // Created by booky10 in BetterSleepPlugin (22:37 27.02.21)
 
+import org.bukkit.Bukkit;
 import org.bukkit.World;
+import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import tk.booky.bettersleep.BetterSleepMain;
@@ -53,6 +55,17 @@ public final class BetterSleepManager {
 
             @Override
             public void run() {
+                getSleeping(world.getUID()).forEach(uuid -> {
+                    Player player = Bukkit.getPlayer(uuid);
+                    if (player == null || !player.isOnline()) {
+                        removeSleeping(uuid);
+                    } else {
+                        if (!player.isSleeping()) {
+                            removeSleeping(uuid);
+                        }
+                    }
+                });
+
                 if (world.isDayTime() || !canSkip(world)) {
                     if (world.isDayTime()) consumer.accept(null);
                     cancel();
