@@ -71,4 +71,8 @@ public final class BetterSleepManager {
     public static int getSleepingNeeded(World world) {
         return (int) (world.getPlayerCount() * PERCENTAGE);
     }
+
+    public static boolean isAlreadySkipping(UUID world) {
+        return skippingWorlds.contains(world);
+    }
 }
