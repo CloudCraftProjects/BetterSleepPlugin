@@ -1,4 +1,4 @@
-package tk.booky.bettersleepplugin.manager;
+package tk.booky.bettersleep.manager;
 // Created by booky10 in BetterSleepPlugin (13:27 28.02.21)
 
 import org.bukkit.World;

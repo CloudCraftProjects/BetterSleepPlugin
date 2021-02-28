@@ -1,12 +1,12 @@
-package tk.booky.bettersleepplugin.manager;
+package tk.booky.bettersleep.manager;
 // Created by booky10 in BetterSleepPlugin (22:37 27.02.21)
 
 import org.bukkit.World;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
-import tk.booky.bettersleepplugin.BetterSleepMain;
-import tk.booky.bettersleepplugin.exceptions.AlreadyDayException;
-import tk.booky.bettersleepplugin.exceptions.AlreadySkippingException;
+import tk.booky.bettersleep.BetterSleepMain;
+import tk.booky.bettersleep.exceptions.AlreadyDayException;
+import tk.booky.bettersleep.exceptions.AlreadySkippingException;
 
 import java.util.*;
 import java.util.function.Consumer;

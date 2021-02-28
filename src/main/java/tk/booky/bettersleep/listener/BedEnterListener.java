@@ -1,4 +1,4 @@
-package tk.booky.bettersleepplugin.listener;
+package tk.booky.bettersleep.listener;
 // Created by booky10 in BetterSleepPlugin (22:35 27.02.21)
 
 import org.bukkit.World;
@@ -6,8 +6,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerBedEnterEvent;
-import tk.booky.bettersleepplugin.manager.BetterSleepManager;
-import tk.booky.bettersleepplugin.manager.MessageManager;
+import tk.booky.bettersleep.manager.BetterSleepManager;
+import tk.booky.bettersleep.manager.MessageManager;
 
 public class BedEnterListener implements Listener {
 

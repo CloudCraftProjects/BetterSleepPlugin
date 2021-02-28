@@ -1,4 +1,4 @@
-package tk.booky.bettersleepplugin.exceptions;
+package tk.booky.bettersleep.exceptions;
 // Created by booky10 in BetterSleepPlugin (13:31 28.02.21)
 
 import org.bukkit.World;

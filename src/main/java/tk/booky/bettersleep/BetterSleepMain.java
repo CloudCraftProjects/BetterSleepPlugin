@@ -1,8 +1,8 @@
-package tk.booky.bettersleepplugin;
+package tk.booky.bettersleep;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
-import tk.booky.bettersleepplugin.listener.BedEnterListener;
+import tk.booky.bettersleep.listener.BedEnterListener;
 
 public final class BetterSleepMain extends JavaPlugin {
 
