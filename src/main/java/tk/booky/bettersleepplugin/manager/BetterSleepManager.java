@@ -8,34 +8,36 @@ import tk.booky.bettersleepplugin.BetterSleepMain;
 import tk.booky.bettersleepplugin.exceptions.AlreadyDayException;
 import tk.booky.bettersleepplugin.exceptions.AlreadySkippingException;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 public final class BetterSleepManager {
 
-    private static final List<UUID> sleeping = new ArrayList<>();
-    private static final List<UUID> skipping = new ArrayList<>();
+    private static final HashMap<UUID, UUID> sleeping = new HashMap<>();
+    private static final List<UUID> skippingWorlds = new ArrayList<>();
 
     public static final double PERCENTAGE = 0.3;
 
     public static boolean isSleeping(UUID uuid) {
-        return sleeping.contains(uuid);
+        return sleeping.containsKey(uuid);
     }
 
-    public static List<UUID> getSleeping() {
-        return Collections.unmodifiableList(sleeping);
+    public static List<UUID> getSleeping(World world) {
+        return sleeping.entrySet().stream().filter(entry -> world.getUID().equals(entry.getValue())).map(Map.Entry::getKey).collect(Collectors.toList());
     }
 
-    public static boolean addSleeping(UUID uuid) {
-        if (!isSleeping(uuid)) return sleeping.add(uuid);
-        else return false;
+    public static boolean addSleeping(World world, UUID uuid) {
+        if (!isSleeping(uuid)) {
+            sleeping.put(uuid, world.getUID());
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public static boolean removeSleeping(UUID uuid) {
-        return sleeping.remove(uuid);
+    public static void removeSleeping(UUID uuid) {
+        sleeping.remove(uuid);
     }
 
     public static boolean canSkip(World world) {
@@ -44,9 +46,9 @@ public final class BetterSleepManager {
 
     public static BukkitTask skipNight(World world, Consumer<Boolean> consumer) {
         if (world.isDayTime()) throw new AlreadyDayException(world);
-        if (skipping.contains(world.getUID())) throw new AlreadySkippingException(world);
+        if (skippingWorlds.contains(world.getUID())) throw new AlreadySkippingException(world);
 
-        skipping.add(world.getUID());
+        skippingWorlds.add(world.getUID());
         return new BukkitRunnable() {
             @Override
             public void run() {
@@ -60,7 +62,7 @@ public final class BetterSleepManager {
 
             @Override
             public synchronized void cancel() throws IllegalStateException {
-                skipping.remove(world.getUID());
+                skippingWorlds.remove(world.getUID());
                 super.cancel();
             }
         }.runTaskTimer(BetterSleepMain.main, 5, 5);
