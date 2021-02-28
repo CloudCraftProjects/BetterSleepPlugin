@@ -14,6 +14,6 @@ public final class MessageManager {
     public static final String SLEEPING_CANCEL = PREFIX + "§cDas Überspringen der Nacht wurde abgebrochen, da %s aus dem Bett gegangen ist!";
 
     public static void broadcastWorld(World world, String message, Object... args) {
-        world.getPlayers().forEach(player -> player.sendMessage(String.format(message, args)));
+        world.getPlayers().forEach(player -> player.sendActionBar(String.format(message, args)));
     }
 }
