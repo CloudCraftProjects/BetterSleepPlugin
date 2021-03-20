@@ -23,7 +23,7 @@ public class BedLeaveListener implements Listener {
             MessageManager.broadcastWorld(world, MessageManager.SLEEPING_NEEDED, BetterSleepManager.getSleeping(world.getUID()).size(), BetterSleepManager.getSleepingNeeded(world), String.format(MessageManager.SLEEPING_NEEDED_LEAVE, player.getName()));
 
             if (!BetterSleepManager.canSkip(world) && BetterSleepManager.isAlreadySkipping(world.getUID())) {
-                MessageManager.broadcastWorld(world, MessageManager.SLEEPING_CANCEL, player.getName(), String.format(MessageManager.SLEEPING_NEEDED_LEAVE, player.getName()));
+                MessageManager.broadcastWorld(world, false, MessageManager.SLEEPING_CANCEL, player.getName());
             }
         }
     }

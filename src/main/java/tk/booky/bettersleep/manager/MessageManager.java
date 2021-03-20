@@ -11,7 +11,7 @@ public final class MessageManager {
     public static final String SLEEPING_NEEDED_JOIN = "§a+%s";
     public static final String SLEEPING_NEEDED_LEAVE = "§c-%s";
     public static final String SLEEPING_START = PREFIX + "§aDie Nacht wird übersprungen...";
-    public static final String SLEEPING_CANCEL = "§cAbbruch! §c-%s";
+    public static final String SLEEPING_CANCEL = PREFIX + "§cDas Überspringen wurde wegen %s abgebrochen!";
 
     public static void broadcastWorld(World world, String message, Object... args) {
         broadcastWorld(world, true, message, args);
